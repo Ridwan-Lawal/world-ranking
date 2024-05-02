@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateSearchedCountry } from "./countriesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountry, updateSearchedCountry } from "./countriesSlice";
 
 function SearchCountry() {
   const [searchCountry, setSearchCountry] = useState();
+  const { totalCountries } = useSelector(getCountry);
 
   const dispatch = useDispatch();
 
@@ -15,7 +16,7 @@ function SearchCountry() {
   return (
     <div className="flex justify-between items-center gap-5 ">
       <p className="text-grays font-semibold sm:text-[17.5px] text-[16px] w-[40%]">
-        Found X countries
+        Found {totalCountries} countries
       </p>
 
       <form

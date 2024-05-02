@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import Country from "./Country";
-import { useSelector } from "react-redux";
-import { getCountry } from "./countriesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountry, updateTotalCountries } from "./countriesSlice";
+import { useEffect } from "react";
 
 /* eslint-disable react/prop-types */
 function ListCountries({ countriesList }) {
-  const { searchedCountry, sortBy, region } = useSelector(getCountry);
+  const { searchedCountry, sortBy, region, status } = useSelector(getCountry);
+  const dispatch = useDispatch();
 
   // default sorting by population
   const defaultSortBypopulation = countriesList.sort((a, b) => {
@@ -17,10 +19,16 @@ function ListCountries({ countriesList }) {
 
   // for searching countries
   const searchedCountriesResults = searchedCountry
-    ? defaultSortBypopulation?.filter(
-        (country) =>
-          country.name.common.toLowerCase() === searchedCountry.toLowerCase()
-      )
+    ? defaultSortBypopulation?.filter((country) => {
+        if (country.name.common.toLowerCase() === searchedCountry.toLowerCase())
+          return country;
+        else if (country.region.toLowerCase() === searchedCountry.toLowerCase())
+          return country;
+        else if (
+          country?.subregion?.toLowerCase() === searchedCountry.toLowerCase()
+        )
+          return country;
+      })
     : defaultSortBypopulation;
   console.log(searchedCountriesResults);
 
@@ -33,6 +41,22 @@ function ListCountries({ countriesList }) {
 
   // for status filtering
 
+  const statusFiltering = status
+    ? filterByRegion.filter((country) =>
+        status === "independent" ? country.independent : country.unMember
+      )
+    : filterByRegion;
+
+  // lists of countries based on searching, filtering and sortings
+  const countries = statusFiltering;
+
+  useEffect(
+    function () {
+      dispatch(updateTotalCountries(countries.length));
+    },
+    [countries, dispatch]
+  );
+
   return (
     <div className="mt-10">
       <div className="list-header grid grid-cols-4 justify-between border-b-2 pb-4 border-darkGrays">
@@ -43,7 +67,7 @@ function ListCountries({ countriesList }) {
       </div>
 
       <div className="country flex flex-col  py-5 gap-y-7">
-        {filterByRegion.map((country, id) => (
+        {countries.map((country, id) => (
           <Link key={id} to={`/country/${country.name.common}`}>
             <div className="grid grid-cols-4">
               <Country country={country} />

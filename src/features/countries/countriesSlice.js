@@ -5,6 +5,7 @@ const initialState = {
   sortBy: "population",
   region: [],
   status: "",
+  totalCountries: 0,
 };
 
 const countriesSlice = createSlice({
@@ -25,7 +26,11 @@ const countriesSlice = createSlice({
     },
 
     updateStatus(state, action) {
-      state.status = action.payload;
+      state.status = state.status === action.payload ? "" : action.payload;
+    },
+
+    updateTotalCountries(state, action) {
+      state.totalCountries = action.payload;
     },
   },
 });
@@ -35,6 +40,7 @@ export const {
   updateSortBy,
   updateRegion,
   updateStatus,
+  updateTotalCountries,
 } = countriesSlice.actions;
 
 export default countriesSlice.reducer;
