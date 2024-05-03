@@ -1,11 +1,15 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import CountryDetails, {
-  loader as countryLoader,
-} from "./features/countryDetails/CountryDetails";
-import Home, { loader as countriesListLoader } from "./features/countries/Home";
-
-import AppLayout from "./ui/AppLayout";
+import { loader as countryLoader } from "./features/countryDetails/CountryDetails";
+import { loader as countriesListLoader } from "./features/countries/Home";
+import { Suspense, lazy } from "react";
 import Error from "./ui/Error";
+import Loader from "./ui/Loader";
+
+const Home = lazy(() => import("./features/countries/Home"));
+const AppLayout = lazy(() => import("./ui/AppLayout"));
+const CountryDetails = lazy(() =>
+  import("./features/countryDetails/CountryDetails")
+);
 
 function App() {
   const router = createBrowserRouter([
@@ -32,7 +36,9 @@ function App() {
 
   return (
     <div className="min-h-screen relative oveflow-auto pb-10 bg-veryDarkGrays  font-vietnam">
-      <RouterProvider router={router} />
+      <Suspense fallback={<Loader />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </div>
   );
 }

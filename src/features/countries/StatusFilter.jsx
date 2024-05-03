@@ -5,7 +5,6 @@ import { getCountry, updateStatus } from "./countriesSlice";
 function StatusFilter() {
   const { status } = useSelector(getCountry);
   const dispatch = useDispatch();
-  console.log(status);
 
   return (
     <div>

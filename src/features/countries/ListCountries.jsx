@@ -30,7 +30,6 @@ function ListCountries({ countriesList }) {
           return country;
       })
     : defaultSortBypopulation;
-  console.log(searchedCountriesResults);
 
   // for regional filtering
   const filterByRegion = region.length
