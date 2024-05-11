@@ -42,10 +42,10 @@ function CountryDetailsFooter({ countryBorders }) {
     <footer className="px-8">
       <h3 className="text-grays text-[14px]">Neighbouring Countries:</h3>
 
-      <div className="flex gap-5 mt-5 flex-wrap">
+      <div className="flex  justify-start items-center flex-wrap gap-y-5  mt-5">
         <p className="text-grays text-[13px]">{errors}</p>
         {neighbours?.map((neighbour, id) => (
-          <div key={id}>
+          <div className=" mr-4" key={id}>
             <section
               onClick={() => navigate(`/country/${neighbour.name.common}`)}
               className="w-fit rounded-[4px] overflow-hidden cursor-pointer"
