@@ -58,7 +58,7 @@ function ListCountries({ countriesList }) {
 
   return (
     <div className="mt-10">
-      <div className="list-header grid grid-cols-4 justify-between border-b-2 pb-4 border-darkGrays">
+      <div className="list-header grid grid-cols-4 justify-between border-b-2 pb-4 border-darkGrays gap-2">
         <p>Flag</p>
         <p>Name</p>
         <p>Population</p>
@@ -68,7 +68,7 @@ function ListCountries({ countriesList }) {
       <div className="country flex flex-col  py-5 gap-y-7">
         {countries.map((country, id) => (
           <Link key={id} to={`/country/${country.name.common}`}>
-            <div className="grid grid-cols-4">
+            <div className="grid grid-cols-4 gap-4 ">
               <Country country={country} />
             </div>
           </Link>

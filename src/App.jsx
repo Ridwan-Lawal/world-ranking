@@ -21,13 +21,11 @@ function App() {
           path: "/",
           element: <Home />,
           loader: countriesListLoader,
-          errorElement: <Error />,
         },
 
         {
           path: "/country/:countryName",
           element: <CountryDetails />,
-          errorElement: <Error />,
           loader: countryLoader,
         },
       ],

@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate, useRouteError } from "react-router-dom";
 
 function Error() {
+  const [errorMessage, setErrorMessage] = useState("");
   const error = useRouteError();
   const navigate = useNavigate();
-  console.log(error.status);
-  console.log(error.data);
+
+  if (error.status === 404) setErrorMessage("This page doesn't exist");
+
+  if (error.status === 503)
+    setErrorMessage("Looks like the API is down, couldn't get data!");
+
   return (
     <div className=" text-white p-5">
       <IoArrowBack
@@ -14,8 +20,7 @@ function Error() {
       />
       <div className="flex justify-center items-center h-[93vh] clear-start flex-col gap-2">
         <p className="text-4xl">👻</p>
-        <p className="text-xl">Couldn't find the page you're looking for...</p>
-        <p className="text-base">{error.data}</p>
+        <p className="text-xl text-white">{errorMessage}</p>
       </div>
     </div>
   );
