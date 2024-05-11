@@ -15,13 +15,11 @@ function Country({ country }) {
         />
       </section>
       <div>
-        <p className="w-16 bread-all  border">
-          {country?.name?.common.slice(0, 6)}
-        </p>
+        <p className="w-16 bread-all  ">{country?.name?.common.slice(0, 6)}</p>
         <p>{country?.name?.common.slice(7)}</p>
       </div>
       <div>
-        <p style={style} className="w-16  break-words  flex border">
+        <p style={style} className="w-16  break-words  flex ">
           {formatNumber(country?.population).slice(0, 8)}
         </p>
         <p>{formatNumber(country?.population).slice(8)}</p>
