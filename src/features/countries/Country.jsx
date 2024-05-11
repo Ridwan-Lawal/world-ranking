@@ -15,7 +15,7 @@ function Country({ country }) {
         />
       </section>
       <div>
-        <p className="w-16 bread-all  ">{country?.name?.common.slice(0, 6)}</p>
+        <p className="w-16 bread-all  ">{country?.name?.common.slice(0, 7)}</p>
         <p>{country?.name?.common.slice(7)}</p>
       </div>
       <div>
