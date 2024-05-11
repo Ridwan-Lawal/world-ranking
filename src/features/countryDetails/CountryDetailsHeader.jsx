@@ -17,12 +17,13 @@ function CountryDetailsHeader({ countryData }) {
         <p className="text-[14px] ">{countryData?.name?.official}</p>
       </section>
 
-      <section className="flex gap-8">
-        <CountryDetailsButton
-          content="Population"
-          value={countryData?.population}
-        />
-        <CountryDetailsButton content="Area (km²)" value={countryData?.area} />
+      <section className="flex gap-4 sm:gap-8 px-8">
+        <CountryDetailsButton value={countryData?.population}>
+          Population
+        </CountryDetailsButton>
+        <CountryDetailsButton value={countryData?.area}>
+          Area<span className="text-[9px]">(km²)</span>
+        </CountryDetailsButton>
       </section>
     </header>
   );
